@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
 
 ## Start up Websocket server
-Navigate into server directory and run `node webSocketServer.js`
+In a separate terminal avigate into server directory and run `node webSocketServer.js` watch this terminal for message from the anugular app.
 
 ## Development server
 
