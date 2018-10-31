@@ -36,3 +36,5 @@ export class UsersService {
   }
 
 }
+
+//https://stackoverflow.com/questions/13028604/sending-a-javascript-object-through-websockets-with-faye/13034191
