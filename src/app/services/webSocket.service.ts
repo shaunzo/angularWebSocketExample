@@ -1,9 +1,12 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class WebSocketService {
   ws: WebSocket;
+  messageReceived  = new Subject;
 
-  createObservablesocket(url: string): Observable<string> {
+  createObservablesocket(url: string): Observable<any> {
     // Instantiate the client socket
     this.ws = new WebSocket(url);
 

@@ -14,13 +14,15 @@ import { UsersService } from './services/users.service';
 import { ChatHeaderComponent } from './chat-header/chat-header.component';
 import { JoinChatComponent } from './join-chat/join-chat.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { MembersComponent } from './chat-room/members/members.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatHeaderComponent,
     JoinChatComponent,
-    ChatRoomComponent
+    ChatRoomComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ export class AuthService {
 
   joinedChat = false;
 
-  constructor(private router: Router) {}
+  constructor( private router: Router ) {}
 
   isAuthenticated() {
     const promise = new Promise(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { AuthService } from '../services/auth.service';
+import { WebSocketService  } from '../services/webSocket.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-join-chat',
@@ -10,17 +11,27 @@ import { AuthService } from '../services/auth.service';
 export class JoinChatComponent implements OnInit {
 
   userName = '';
+  url = environment.webSocketUrl;
 
-  constructor( private usersService: UsersService, private authService: AuthService) { }
+  constructor( private usersService: UsersService, private wsService: WebSocketService) { }
 
   ngOnInit() {
+    // Initiate websocket connection
+    // this.wsService.createObservablesocket(this.url)
+    // .subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    //   err => console.log(err),
+    //   () => console.log('The observable stream is complete')
+    // );
   }
 
 
   join() {
-    this.usersService.userJoined.next(this.userName);
+    console.log('this.usersService.userJoined.next(this.userName)', this.userName);
     if (this.userName !== '') {
-      this.authService.login();
+      this.usersService.newUser(this.userName);
     }
   }
 

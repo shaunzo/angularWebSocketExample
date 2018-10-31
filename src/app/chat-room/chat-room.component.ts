@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-chat-room',
@@ -7,12 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChatRoomComponent implements OnInit {
 
-  @Input() userName: string;
+  userName: any;
 
 
-  constructor() { }
+  constructor( private usersService: UsersService) {
+  }
 
   ngOnInit() {
+    this.userName = this.usersService.userName;
+    console.log('Joined chatroom as ' + this.usersService.userName);
   }
 
 }
