@@ -45,7 +45,7 @@ export class MembersComponent implements OnInit {
 
     console.log('Chat members: ', this.chatMembers);
 
-    this.addUserToChatMembers();
+    this.addUserToChatMembers(this.userName);
 
     this.usersService.userJoined.subscribe(
       data => {
@@ -57,9 +57,11 @@ export class MembersComponent implements OnInit {
           if (name === this.userName) {
             this.userTypingIndex = i;
             return;
+          } else {
+            // Else add user to members list
+            this.addUserToChatMembers(data);
           }
         }
-        this.addUserToChatMembers();
       }
     );
 
@@ -80,9 +82,9 @@ export class MembersComponent implements OnInit {
   }
 
 
-  addUserToChatMembers() {
+  addUserToChatMembers(username) {
     this.chatMember = {
-      name: this.userName,
+      name: username,
       typing: false
     };
 
