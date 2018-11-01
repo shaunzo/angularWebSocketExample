@@ -10,6 +10,7 @@ import { WebSocketService } from './services/webSocket.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { UsersService } from './services/users.service';
+import { ChatService } from './services/chat.service';
 
 import { ChatHeaderComponent } from './chat-header/chat-header.component';
 import { JoinChatComponent } from './join-chat/join-chat.component';
@@ -33,7 +34,8 @@ import { MembersComponent } from './chat-room/members/members.component';
     WebSocketService,
     AuthService,
     AuthGuard,
-    UsersService
+    UsersService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

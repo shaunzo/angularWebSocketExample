@@ -2,13 +2,14 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { WebSocketService  } from '../services/webSocket.service';
-import { UserAdded } from '../types/userAdded.model';
+import { UserAddedMessage } from '../types/userAdded';
 
 @Injectable()
 export class UsersService {
   userJoined = new Subject;
   userName: any = '';
-  members: UserAdded[] = [];
+  members = [];
+  message: UserAddedMessage;
 
   constructor( private authService: AuthService, private wsService: WebSocketService ) {
     this.userJoined.subscribe(
@@ -18,11 +19,21 @@ export class UsersService {
     );
 
     this.wsService.messageReceived.subscribe(
-      (data: UserAdded) => {
-        // this.members.push(message);
-        console.log(data);
+      data => {
+        const regex = /":"|","/g;
+        const dataStr = data.toString()
+                            .replace('{"', '')
+                            .replace('"}', '')
+                            .replace(regex, ',');
+        const dataArr = dataStr.split(',');
 
-        // console.log('Updated members array: ', obj);
+        // Message converted to object
+        this.message = {
+          name: dataArr[1],
+          user: dataArr[3],
+          message: dataArr[5]
+        };
+        console.log('Message converted to object: ', this.message);
       }
     );
 
@@ -37,4 +48,4 @@ export class UsersService {
 
 }
 
-//https://stackoverflow.com/questions/13028604/sending-a-javascript-object-through-websockets-with-faye/13034191
+// https://stackoverflow.com/questions/13028604/sending-a-javascript-object-through-websockets-with-faye/13034191

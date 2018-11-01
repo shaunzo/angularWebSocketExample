@@ -16,7 +16,7 @@ export class ChatRoomComponent implements OnInit {
 
   ngOnInit() {
     this.userName = this.usersService.userName;
-    console.log('Joined chatroom as ' + this.usersService.userName);
+    console.log('Joined chatroom as ' + this.userName);
   }
 
 }

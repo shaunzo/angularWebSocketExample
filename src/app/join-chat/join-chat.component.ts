@@ -32,6 +32,7 @@ export class JoinChatComponent implements OnInit {
     console.log('this.usersService.userJoined.next(this.userName)', this.userName);
     if (this.userName !== '') {
       this.usersService.newUser(this.userName);
+      this.usersService.userJoined.next(this.userName);
     }
   }
 

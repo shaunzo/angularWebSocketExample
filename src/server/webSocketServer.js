@@ -30,7 +30,9 @@ function (websocket) {
     websocket.on('message', function (message) {
         console.log('Server received: ', message);
 
-        websocket.send([{message}]);
+        websocket.send(message);
+
+        console.log('sending back message to client: ', message)
 
 
         // var todaysDate = new Date();
