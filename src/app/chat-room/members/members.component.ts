@@ -59,6 +59,7 @@ export class MembersComponent implements OnInit {
             return;
           }
         }
+        this.addUserToChatMembers();
       }
     );
 
