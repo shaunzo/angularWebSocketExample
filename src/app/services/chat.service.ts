@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChatMessage } from '../types/chatMessage';
 import { UserAddedMessage } from '../types/userAdded';
+
 import { UsersService } from '../services/users.service';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class ChatService {
 
     console.log('Initiated chat service');
     // Remove placeholder members
-    this.chatMembers = [{name: 'Michael'}, {name: 'James'}, {name: 'John'}];
+    this.chatMembers = [{name: 'Michael', typing: false}, {name: 'James', typing: false}, {name: 'John', typing: false}];
   }
+
 }

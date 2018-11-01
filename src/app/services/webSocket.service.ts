@@ -23,6 +23,7 @@ export class WebSocketService {
 
   // This send a message from client to server
   sendMessage(message: any) {
-    this.ws.send(message);
+    const messageStr = JSON.stringify(message);
+    this.ws.send(messageStr);
   }
 }

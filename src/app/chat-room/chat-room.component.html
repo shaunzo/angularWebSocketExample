@@ -5,6 +5,10 @@
     <p>
       Joined chat as {{userName}}!
     </p>
+    <hr>
+    <div class="form-group">
+      <textarea (input)="onChatInput()" (keyup)="onKeyUp()" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Say something..."></textarea>
+    </div>
   </div>
 
   <div class="col-2">

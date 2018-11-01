@@ -7,6 +7,9 @@ import { UserAddedMessage } from '../types/userAdded';
 @Injectable()
 export class UsersService {
   userJoined = new Subject;
+  userTyping = new Subject<string>();
+  userStoppedTyping = new Subject;
+
   userName: any = '';
   members = [];
   message: UserAddedMessage;
@@ -27,17 +30,34 @@ export class UsersService {
                             .replace(regex, ',');
         const dataArr = dataStr.split(',');
 
-        // Message converted to object
+        // Message received from server converted to object
         this.message = {
           name: dataArr[1],
           user: dataArr[3],
           message: dataArr[5]
         };
         console.log('Message converted to object: ', this.message);
+
+        // Dispatch Subjects based on message name
+        switch (this.message.name) {
+          case 'user_added':
+            this.userJoined.next(this.userName);
+            break;
+
+          case 'user_typing':
+            this.userTyping.next(this.userName);
+            break;
+
+          case 'user_stopped_typing':
+            this.userStoppedTyping.next(this.userName);
+            break;
+
+          default:
+            console.log('No action allocated for message!');
+            break;
+        }
       }
     );
-
-
   }
 
   newUser(username) {

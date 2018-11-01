@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
+
 import { WebSocketService  } from '../../services/webSocket.service';
 import { UsersService } from '../../services/users.service';
+import { ChatService } from '../../services/chat.service';
+
 import { UserAddedMessage } from '../../types/userAdded';
-import { ChatService } from 'src/app/services/chat.service';
+import { ChatMember } from '../../types/chatMember';
 
 @Component({
   selector: 'app-members',
@@ -15,7 +18,9 @@ export class MembersComponent implements OnInit {
   url = environment.webSocketUrl;
   userName = '';
   userAdded: UserAddedMessage;
+  userTypingIndex: number;
   chatMembers = [];
+  chatMember: ChatMember;
 
   constructor(  private wsService: WebSocketService,
                 private usersService: UsersService,
@@ -36,15 +41,50 @@ export class MembersComponent implements OnInit {
 
     this.chatMembers = this.chatService.chatMembers;
 
-    this.wsService.sendMessage(JSON.stringify(this.userAdded));
+    this.wsService.sendMessage(this.userAdded);
 
     console.log('Chat members: ', this.chatMembers);
 
     this.addUserToChatMembers();
+
+    this.usersService.userJoined.subscribe(
+      data => {
+        // Go through the members array to find the idex for this user.
+        console.log('Running loop:');
+        for (let i = 0; i < this.chatMembers.length; i++) {
+          const name = this.chatMembers[i].name;
+          console.log(this.chatMembers[i]);
+          if (name === this.userName) {
+            this.userTypingIndex = i;
+            return;
+          }
+        }
+      }
+    );
+
+    // Update DOM if user is typing
+    this.usersService.userTyping.subscribe(
+      user => {
+        console.log(user + ' is typing , index is ' + this.userTypingIndex );
+        this.chatMembers[this.userTypingIndex].typing = true;
+      }
+    );
+
+    // Update DOM if user stopes typing
+    this.usersService.userStoppedTyping.subscribe(
+      user => {
+        this.chatMembers[this.userTypingIndex].typing = false;
+      }
+    );
   }
 
 
   addUserToChatMembers() {
+    this.chatMember = {
+      name: this.userName,
+      typing: false
+    };
+
     let userAlreadyJoined = false;
     for (let i = 0; i < this.chatMembers.length; i++) {
       const chatMember = this.chatMembers[i];
@@ -55,9 +95,7 @@ export class MembersComponent implements OnInit {
     }
     console.log('userAlreadyJoined = ', userAlreadyJoined);
     if (!userAlreadyJoined) {
-      this.chatMembers.push({
-        name: this.userName
-      });
+      this.chatMembers.push(this.chatMember);
       console.log('New user added to array: ', this.chatMembers);
     }
   }
