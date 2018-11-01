@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   // We add the URL for the websocket here
   // webSocketUrl: 'ws://localhost:8085'
-  webSocketUrl: 'ws://192.168.101.246:8085'
+   webSocketUrl: 'ws://192.168.101.246:8085'
 };
 
 /*

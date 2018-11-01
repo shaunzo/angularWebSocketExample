@@ -51,16 +51,19 @@ export class MembersComponent implements OnInit {
       data => {
         // Go through the members array to find the idex for this user.
         console.log('Running loop:');
+        let matched = false;
         for (let i = 0; i < this.chatMembers.length; i++) {
           const name = this.chatMembers[i].name;
           console.log(this.chatMembers[i]);
           if (name === this.userName) {
+            matched = true;
             this.userTypingIndex = i;
             return;
-          } else {
-            // Else add user to members list
-            this.addUserToChatMembers(data);
           }
+        }
+        if (!matched) {
+          // Else add user to members list
+          this.addUserToChatMembers(data);
         }
       }
     );
@@ -98,7 +101,8 @@ export class MembersComponent implements OnInit {
     }
     console.log('userAlreadyJoined = ', userAlreadyJoined);
     if (!userAlreadyJoined) {
-      this.chatMembers.push(this.chatMember);
+      this.chatService.chatMembers.push(this.chatMember);
+      // this.chatMembers.push(this.chatMember);
       console.log('New user added to array: ', this.chatMembers);
     }
   }
