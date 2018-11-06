@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   // Define our send message function
   sendMessage() {
-    this.chat.sendMsg('Test Message');
+    this.chat.sendMsg('new-message', 'Test Message');
   }
 
 }
