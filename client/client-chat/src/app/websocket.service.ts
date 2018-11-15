@@ -1,4 +1,5 @@
 // Step 1: define our websocket service
+// This service makes our websocket connection and supplies an observable that our abgular application listens to
 
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';

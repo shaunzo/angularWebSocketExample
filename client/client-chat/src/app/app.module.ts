@@ -4,13 +4,23 @@ import { WebsocketService } from './websocket.service';
 import { ChatService } from './chat.service';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+
+// Angular Material imports
+import {MatToolbarModule} from '@angular/material/toolbar';
+// import { ChatroomComponent } from './chatroom/chatroom.component';
+import { ChatroomModule } from './chatroom/chatroom.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+   //  ChatroomComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatToolbarModule,
+    ChatroomModule
   ],
   providers: [
     ChatService,

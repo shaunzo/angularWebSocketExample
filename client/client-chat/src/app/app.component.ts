@@ -10,6 +10,10 @@ import { ChatService } from './chat.service';
 })
 export class AppComponent implements OnInit {
   title = 'client-chat';
+  user = {
+    loggedIn: false,
+    userName: null
+  };
 
   constructor( private chat: ChatService) {}
 

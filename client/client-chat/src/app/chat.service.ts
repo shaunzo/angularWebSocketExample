@@ -1,4 +1,5 @@
 // Step 2: define our chat service which will simplify the way we interact with our websockets
+// This service will dispatch subjects based on teh message type received
 
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
