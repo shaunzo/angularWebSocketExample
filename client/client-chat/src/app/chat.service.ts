@@ -11,7 +11,13 @@ import { map } from 'rxjs/operators';
 })
 export class ChatService {
 
-  messages: Subject<any>;
+  user = {
+    userName: 'Ted',
+    loggedIn: true
+  };
+
+  messages =  new Subject;
+  userTyping = new Subject;
 
   // Listen for incoming messages
   constructor( private wsService: WebsocketService) {
@@ -23,12 +29,28 @@ export class ChatService {
         return response;
       })
     );
+
+    this.userTyping = <Subject<any>> wsService
+    .connect().pipe(
+      map((response: any): any => {
+        console.log('Message type = ' + response.type);
+        // Dispatch subject based on response.type
+        return response;
+      })
+    );
+
+
   }
 
   sendMsg(type, msg) {
     switch (type) {
       case 'new-message':
+      console.log('dispatching subject "messages",message received from socket:', msg);
       this.messages.next(msg);
+        break;
+      case 'user-typing':
+      console.log('dispatching subject "userTyping", message received from socket:', msg);
+      this.userTyping.next({ type: 'user-typing', message: msg});
         break;
       default:
         console.log('No action for message!');

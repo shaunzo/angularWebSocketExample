@@ -1,3 +1,10 @@
-<p>
-  chatroom works!
-</p>
+<div class="chatroom content-width">
+
+  <div class="activity-log">
+    <p *ngIf="userTyping" class="mat-caption"> <strong>{{userNameTyping}}</strong> is typing...</p>
+  </div>
+
+  <app-chatterbox></app-chatterbox>
+
+  <app-chat-input></app-chat-input>
+</div>

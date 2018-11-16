@@ -1,0 +1,18 @@
+.chatroom {
+  background-color: #f7f6f6;
+  height: 80vh;
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .activity-log {
+    text-align: center;
+    min-height: 50px;
+
+    p {
+      font-style: italic;
+      opacity: .7;
+    }
+  }
+}

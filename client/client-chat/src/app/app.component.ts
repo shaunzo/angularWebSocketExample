@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Subscribe to all incoming messages
-    this.chat.messages.subscribe(msg => {
-      console.log(msg);
-    });
+    // this.chat.messages.subscribe(msg => {
+    //   console.log(msg);
+    // });
   }
 
   // Define our send message function

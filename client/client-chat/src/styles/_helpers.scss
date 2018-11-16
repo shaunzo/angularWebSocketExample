@@ -1,0 +1,16 @@
+.content-width {
+  width: 700px;
+  margin: auto;
+}
+
+.flex-space-filler {
+  /* Used primarily for toolbar. This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+     flex: 1 1 auto;
+}
+
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}

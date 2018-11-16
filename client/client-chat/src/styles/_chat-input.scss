@@ -1,0 +1,9 @@
+.chat-input {
+  background: #fff;
+  padding: 10px;
+  flex-grow: 1;
+
+  mat-form-field {
+    width: 100%;
+  }
+}

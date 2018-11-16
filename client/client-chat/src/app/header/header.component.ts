@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  username = '';
+  usernameChange: Boolean = false;
 
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.username = this.chatService.user.userName;
   }
 
 }

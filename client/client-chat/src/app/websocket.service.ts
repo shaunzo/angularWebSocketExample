@@ -39,6 +39,7 @@ export class WebsocketService {
     // Create our observer
     const observer = {
       next: (data: Object) => {
+        console.log('Observer data:', data);
         this.socket.emit('message', JSON.stringify(data));
       }
     };
