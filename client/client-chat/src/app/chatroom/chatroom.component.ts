@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
+import { SocketMessage } from '../types/socketMessage';
 
 @Component({
   selector: 'app-chatroom',
@@ -17,7 +18,7 @@ export class ChatroomComponent implements OnInit {
     this.username = this.chatService.user.userName;
 
     this.chatService.userTyping.subscribe(
-      (user) => {
+      (user: SocketMessage) => {
         const data = JSON.parse(user.text);
         this.userNameTyping = data.message;
         this.userTyping = true;

@@ -1,5 +1,4 @@
 // Step 3: We need to modify our app component
-
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 
@@ -15,7 +14,7 @@ export class AppComponent implements OnInit {
     userName: null
   };
 
-  constructor( private chat: ChatService) {}
+  constructor( private chat: ChatService ) {}
 
   ngOnInit() {
     // Subscribe to all incoming messages

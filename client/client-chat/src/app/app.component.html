@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Chat Application Example</title>
-</head>
-<body>
-  <app-header></app-header>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Application Example</title>
+  </head>
+  <body>
+    <app-header></app-header>
 
-  <!-- <h1>websocket.io application</h1>
+    <!-- <h1>websocket.io application</h1>
 
-  <button (click)="sendMessage()">Send Message</button> -->
-  <app-chatroom></app-chatroom>
-</body>
+    <button (click)="sendMessage()">Send Message</button> -->
+    <router-outlet></router-outlet>
+
+  </body>
 </html>

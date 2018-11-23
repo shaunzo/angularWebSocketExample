@@ -1,0 +1,11 @@
+<div class="login-wrapper content-width">
+  <h1 class="mat-display-3">
+    Please enter your nickname...
+  </h1>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Enter name" [(ngModel)]="username" (input)="onInput()" >
+  </mat-form-field>
+  <span>
+      <button [disabled]="joinDisabled" mat-raised-button color="primary" (click)="joinChat()">Join Chat</button>
+  </span>
+</div>

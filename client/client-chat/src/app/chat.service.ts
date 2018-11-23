@@ -13,11 +13,12 @@ export class ChatService {
 
   user = {
     userName: 'Ted',
-    loggedIn: true
+    loggedIn: false
   };
 
   messages =  new Subject;
   userTyping = new Subject;
+  username = new Subject;
 
   // Listen for incoming messages
   constructor( private wsService: WebsocketService) {
