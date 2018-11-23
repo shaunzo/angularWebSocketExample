@@ -6,6 +6,7 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
 import * as Rx from 'rxjs';
 import { environment } from '../environments/environment';
+import { SocketMessage } from './types/socketMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,9 @@ export class WebsocketService {
       // Everytime this observable receives a message from the server,
       // we'll want to pass teh data received from the message event
       this.socket.on('message', (data) => {
-        observer.next(data);
-        console.log('received a message from websocket server');
+        const socketData = JSON.parse(data.text);
+        observer.next(socketData);
+        console.log('received a message from websocket server', socketData);
       });
 
       return() => {

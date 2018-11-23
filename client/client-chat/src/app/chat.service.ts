@@ -12,8 +12,8 @@ import { map } from 'rxjs/operators';
 export class ChatService {
 
   user = {
-    userName: 'Ted',
-    loggedIn: false
+    userName: '',
+    loggedIn:  false
   };
 
   messages =  new Subject;
@@ -29,6 +29,18 @@ export class ChatService {
         // Dispatch subject based on response.type
         return response;
       })
+    );
+
+    this.username.subscribe(
+      (data: string) => {
+        if (data !== null || data !== '') {
+          this.user.userName = data;
+          this.user.loggedIn = true;
+        } else {
+          this.user.userName = '';
+          this.user.loggedIn = false;
+        }
+      }
     );
 
     this.userTyping = <Subject<any>> wsService

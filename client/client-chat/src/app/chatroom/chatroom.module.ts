@@ -4,12 +4,14 @@ import { ChatroomComponent } from './chatroom.component';
 import { ChatInputComponent } from './chat-input/chat-input.component';
 import {MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ChatterboxComponent } from './chatterbox/chatterbox.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   declarations: [
     ChatroomComponent,

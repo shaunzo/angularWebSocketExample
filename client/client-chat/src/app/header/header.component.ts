@@ -7,13 +7,19 @@ import { ChatService } from '../chat.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  username = '';
-  usernameChange: Boolean = false;
+  username: String = '';
+  loggedIn: Boolean = false;
 
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
     this.username = this.chatService.user.userName;
+    this.chatService.username.subscribe(
+      (data: String) => {
+       this.username = data;
+       this.loggedIn = this.chatService.user.loggedIn;
+      }
+    );
   }
 
 }

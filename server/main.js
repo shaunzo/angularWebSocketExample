@@ -2,6 +2,9 @@ let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 
+let users=[];
+let chat=[];
+
 io.on('connection', (socket) => {
   // Log whenever a user connects
   console.log('user connected');
@@ -15,8 +18,21 @@ io.on('connection', (socket) => {
   // the contents of that message and then echo it back to our client
   // using 'io.emit()'
   socket.on('message', (message) => {
-    console.log("Message received: " + message);
-    io.emit('message', {type: 'new-message', text: message});
+    var msg = JSON.parse(message);
+    console.log("Message received: " + " Message - " + msg.message + " Type: " + msg.type);
+
+    switch (msg.type) {
+      case 'user-typing':
+      io.emit('message', {type: 'user-typing', text: message});
+        break;
+
+      case 'new-message':
+      io.emit('message', {type: 'new-message', text: message});
+        break;
+
+      default:
+        break;
+    }
   });
 });
 
