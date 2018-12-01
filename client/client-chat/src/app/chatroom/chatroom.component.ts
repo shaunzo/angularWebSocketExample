@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
+import { WebsocketService } from '../websocket.service';
 
 // Deprecate this when implementing authGuard
 import { Router } from '@angular/router';
@@ -15,7 +16,7 @@ export class ChatroomComponent implements OnInit {
   userTyping: Boolean = false;
   userNameTyping: String;
 
-  constructor( private chatService: ChatService, private router: Router) { }
+  constructor( private chatService: ChatService, private router: Router, private wsService: WebsocketService) { }
 
   ngOnInit() {
 
@@ -27,7 +28,7 @@ export class ChatroomComponent implements OnInit {
 
     this.username = this.chatService.user.userName;
 
-    this.chatService.userTyping.subscribe(
+    this.wsService.userTyping.subscribe(
       (user: any) => {
         // const data = JSON.parse(user.text);
         this.userNameTyping = user.message;
@@ -39,7 +40,6 @@ export class ChatroomComponent implements OnInit {
           this.userTyping = false;
         }
 
-        console.log('chatroom component: ', user);
         setTimeout(() => {
           this.userNameTyping = null;
           this.userTyping = false;

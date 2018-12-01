@@ -10,22 +10,21 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ChatService {
+  messages =  new Subject;
+  username = new Subject;
 
   user = {
     userName: '',
     loggedIn:  false
   };
 
-  messages =  new Subject;
-  userTyping = new Subject;
-  username = new Subject;
-
   // Listen for incoming messages
   constructor( private wsService: WebsocketService) {
+
+    // Listening for incoming messages
     this.messages = <Subject<any>> wsService
     .connect().pipe(
       map((response: any): any => {
-        console.log('Message type = ' + response.type);
         // Dispatch subject based on response.type
         return response;
       })
@@ -43,28 +42,30 @@ export class ChatService {
       }
     );
 
-    this.userTyping = <Subject<any>> wsService
-    .connect().pipe(
-      map((response: any): any => {
-        console.log('Message type = ' + response.type);
-        // Dispatch subject based on response.type
-        return response;
-      })
+    this.wsService.chatMessage.subscribe(
+      data => {
+        this.wsService.socket.emit('chat-message', data);
+      }
     );
 
 
+    this.wsService.socket.on(
+      'chat-message', (data) => {
+        console.log('Received', data);
+      });
+    );
   }
 
   sendMsg(type, msg) {
     switch (type) {
-      case 'new-message':
-      console.log('dispatching subject "messages",message received from socket:', msg);
-      this.messages.next(msg);
+      case 'chat-message':
+      this.wsService.chatMessage.next({ type: 'chat-message', message: msg.message, username: msg.username });
         break;
+
       case 'user-typing':
-      console.log('dispatching subject "userTyping", message received from socket:', msg);
-      this.userTyping.next({ type: 'user-typing', message: msg});
+      this.wsService.userTyping.next({ type: 'user-typing', message: msg});
         break;
+
       default:
         console.log('No action for message!');
         break;

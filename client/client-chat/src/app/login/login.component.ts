@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   onInput() {
-    console.log(this.username);
     if (this.username === '') {
       this.joinDisabled = true;
     } else {
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   joinChat() {
-    console.log('Clicked Login');
     this.chatService.username.next(this.username);
     this.router.navigate(['/chat']);
   }

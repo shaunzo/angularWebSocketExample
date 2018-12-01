@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../chat.service';
+import { WebsocketService } from '../../websocket.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,7 +15,7 @@ export class ChatInputComponent implements OnInit {
     message: ''
   };
 
-  constructor( private chatService: ChatService) { }
+  constructor( private chatService: ChatService, private wsService: WebsocketService) { }
 
   ngOnInit() {
     this.message.username = this.chatService.user.userName;
@@ -22,11 +23,11 @@ export class ChatInputComponent implements OnInit {
 
   onKeyDown() {
     this.chatService.sendMsg('user-typing', this.chatService.user.userName);
-    console.log('Chat message: ', this.message);
   }
 
-  addMessage() {
-    console.log('Pressed Enter!!');
+  addChatMessage() {
+    this.chatService.sendMsg('chat-message', this.message);
+    this.message.message = '';
   }
 
 }

@@ -21,19 +21,26 @@ io.on('connection', (socket) => {
     var msg = JSON.parse(message);
     console.log("Message received: " + " Message - " + msg.message + " Type: " + msg.type);
 
-    switch (msg.type) {
-      case 'user-typing':
-      io.emit('message', {type: 'user-typing', text: message});
-        break;
+    // switch (msg.type) {
+    //   case 'user-typing':
+    //   io.emit('message', {type: 'user-typing', text: message});
+    //     break;
 
-      case 'new-message':
-      io.emit('message', {type: 'new-message', text: message});
-        break;
+    //   case 'chat-message':
+    //   console.log('Received chat-mesage', msg);
+    //   io.emit('message', {type: 'chat-message', text: message});
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
   });
+
+  socket.on('chat-message', (message) => {
+    io.emit('chat-message', message);
+    console.log('received chat-message: ', message);
+  });
+
 });
 
 // Initialise our websocket server on port 5000

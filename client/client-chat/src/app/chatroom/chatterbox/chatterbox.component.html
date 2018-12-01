@@ -3,3 +3,10 @@
     <i>Welcome to our chat!</i>
     </p>
 </div>
+
+<div *ngFor="let chat of chatMessages">
+  <app-chatterbox-message
+    [username]="chat.username"
+    [chatMessage]="chat.message">
+  </app-chatterbox-message>
+</div>

@@ -5,6 +5,7 @@ import { ChatInputComponent } from './chat-input/chat-input.component';
 import {MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ChatterboxComponent } from './chatterbox/chatterbox.component';
 import { FormsModule } from '@angular/forms';
+import { ChatterboxMessageComponent } from './chatterbox/chatterbox-message/chatterbox-message.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     ChatroomComponent,
     ChatInputComponent,
-    ChatterboxComponent
+    ChatterboxComponent,
+    ChatterboxMessageComponent
   ],
   exports: [
     ChatroomComponent
