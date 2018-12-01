@@ -53,7 +53,6 @@ export class ChatService {
       'chat-message', (data) => {
         console.log('Received', data);
       });
-    );
   }
 
   sendMsg(type, msg) {
