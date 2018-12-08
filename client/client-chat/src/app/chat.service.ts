@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class ChatService {
   messages =  new Subject;
   username = new Subject;
+  newChatMessage = new Subject;
 
   user = {
     userName: '',
@@ -52,6 +53,7 @@ export class ChatService {
     this.wsService.socket.on(
       'chat-message', (data) => {
         console.log('Received', data);
+        this.newChatMessage.next(data);
       });
   }
 

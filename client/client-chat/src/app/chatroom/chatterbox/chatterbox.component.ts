@@ -15,7 +15,7 @@ export class ChatterboxComponent implements OnInit {
   constructor( private chatService: ChatService, private wsService: WebsocketService ) {}
 
   ngOnInit() {
-    this.wsService.chatMessage.subscribe(
+    this.chatService.newChatMessage.subscribe(
       (data: any) => {
         this.chatMessages.push({
           username: data.username,
@@ -24,5 +24,4 @@ export class ChatterboxComponent implements OnInit {
       }
     );
   }
-
 }
